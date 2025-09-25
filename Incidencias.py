@@ -7,9 +7,9 @@ import win32com.client  # para Outlook automation
 # Parametros de conexion de la BD
 db_config = {
     'server': 'Localhost',
-    'database': 'HIS_WEB',
-    'user': 'sa',
-    'password': 'database',
+    'database': 'private',
+    'user': 'private',
+    'password': 'private',
 }
 
 # Configuracion de OutLook
@@ -59,3 +59,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
