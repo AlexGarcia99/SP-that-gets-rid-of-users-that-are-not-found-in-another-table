@@ -16,7 +16,7 @@ db_config = {
 yesterday = datetime.now() - timedelta(days=1)
 outlook = win32com.client.Dispatch("Outlook.Application")
 namespace = outlook.GetNamespace("MAPI")
-recipient = "miguel.floreshe@imss.gob.mx"  # correo del jefe de servicio
+recipient = "private@private.gob.mx"  # correo del jefe de servicio
 subject = f"Estudios realizados el {yesterday.strftime('%Y-%m-%d')} HGZ98"
 body = "Buenos días."
 
@@ -39,7 +39,7 @@ def send_email(to_list, subject, body):
     mail.Send()
 
 def main():
-    additional_recipient = "jcolvera@cmr3.com.mx"  #email extra a copiar en el correo
+    additional_recipient = "private@private.com.mx"  #email extra a copiar en el correo
     # Query a la BD de MS SQL Server del total de estudios de un dia anteior(tomando en cuenta los VisiblePACS=1 y filtrando posibles UIDEstudio repetidos del dia). Apuntar a la BD(inmediatamente despues del FROM) en cuestion en el query.
     sql_query = "SELECT COUNT(W.PARTICION_UID) AS ESTUDIOS FROM (SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY FOLIO ORDER BY (SELECT 1)) AS PARTICION_UID, * FROM [HIS_WEB].[dbo].[ImagenologiaEstudios] WHERE DATEADD(day, -1, convert(date, GETDATE())) = CONVERT(DATE, FECHAESTUDIO) AND VisiblePACS=1) AS T WHERE T.PARTICION_UID=1) AS W"
 
@@ -59,4 +59,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
